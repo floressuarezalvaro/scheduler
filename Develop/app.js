@@ -1,7 +1,11 @@
-let todaysDate = document.getElementById('currentDay');
+$(document).ready(function () {
+let currentTime = moment().format('MMMM Do YYYY');
+$("#currentDay").text(currentTime);
+
+
+
 
 function getApi() {
-    var requestUrl = 'https://momentjs.com/';
     
     fetch(requestUrl)
     .then(function (response) {
@@ -17,7 +21,7 @@ function getApi() {
     //today.append("Hello Punk");
     }
     });
-
-    moment().format();
-
 }
+console.log(currentTime);
+
+})
