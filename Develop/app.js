@@ -13,8 +13,10 @@ $(document).ready(function () {
         if (currentHour > time ) {
             $(timeId).addClass("bg-danger text-light")
             $(timeId).attr("disabled", true);
+            $(timeId).attr("placeholder", "");
         } else if (currentHour === time) {
             $(timeId).addClass("bg-secondary text-light")
+            $(timeId).attr("placeholder", "Current Time");
         } else {
             $(timeId).addClass("bg-success text-light")
         }
