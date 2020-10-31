@@ -1,27 +1,37 @@
 $(document).ready(function () {
-let currentTime = moment().format('MMMM Do YYYY');
-$("#currentDay").text(currentTime);
+    const currentTime = moment().format('MMMM Do YYYY');
+    $("#currentTime").text(currentTime);
+    $("button").text("Submit");
 
+    const times = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22];
 
+    times.forEach(time => {
+        const timeCheck = window.localStorage.getItem(time);
+        const currentHour = moment().hour()
+        const timeId = "#" + time
 
+        if (currentHour > time ) {
+            $(timeId).addClass("bg-danger text-light")
+            $(timeId).attr("disabled", true);
+        } else if (currentHour === time) {
+            $(timeId).addClass("bg-secondary text-light")
+        } else {
+            $(timeId).addClass("bg-success text-light")
+        }
 
-function getApi() {
-    
-    fetch(requestUrl)
-    .then(function (response) {
-    return response.json();
+        if (timeCheck === null) {
+            window.localStorage.setItem(time, "")
+        } else if (timeCheck.length > 0) {
+            $(timeId).attr("value", window.localStorage.getItem(time))
+        }
     })
-    .then(function (data) {
-    // Use the console to examine the response
-    console.log("hi")
-    // TODO: Loop through the data and generate your HTML
-    for (let i = 0; i < data.length; i++) {
-        console.log("Hi there.")
-    //diplayDate.textContent = data[i].login;
-    //today.append("Hello Punk");
-    }
-    });
-}
-console.log(currentTime);
 
+    $("form").on("submit", function (e) {
+        e.preventDefault()
+
+        const time = e.target.querySelector("input").getAttribute("id")
+        const text = e.target.querySelector("input").value
+
+        window.localStorage.setItem(time, text)
+    })
 })
