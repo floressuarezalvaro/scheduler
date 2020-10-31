@@ -1,22 +1,23 @@
 $(document).ready(function () {
-    const currentTime = moment().format('MMMM Do YYYY');
-    $("#currentTime").text(currentTime);
-    $("button").text("Submit");
+    
+    const currentTime = moment().format('MMMM Do YYYY')
+    $("#currentTime").text(currentTime)
+    $("button").text("Submit")
 
-    const times = [9, 10, 11, 12, 13, 14, 15, 16, 17];
+    const times = [9, 10, 11, 12, 13, 14, 15, 16, 17]
 
     times.forEach(time => {
-        const timeCheck = window.localStorage.getItem(time);
+        const timeCheck = window.localStorage.getItem(time)
         const currentHour = moment().hour()
         const timeId = "#" + time
-
-        if (currentHour > time ) {
+        
+        if (currentHour > time) {
             $(timeId).addClass("bg-danger text-light")
             $(timeId).attr("disabled", true);
-            $(timeId).attr("placeholder", "");
+            $(timeId).attr("placeholder", "")
         } else if (currentHour === time) {
             $(timeId).addClass("bg-secondary text-light")
-            $(timeId).attr("placeholder", "Current Time");
+            $(timeId).attr("placeholder", "Current Time")
         } else {
             $(timeId).addClass("bg-success text-light")
         }
